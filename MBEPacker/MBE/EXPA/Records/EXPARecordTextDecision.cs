@@ -69,7 +69,7 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public override List<CHNKRecord> GenerateChunks()
         {
-            List<CHNKRecord> list = base.GenerateChunks();
+            List<CHNKRecord> list = new List<CHNKRecord>();
             if (RefID != null) list.Add(new CHNKRecord(RefID, 0x0));
             if (Text1 != null) list.Add(new CHNKRecord(Text1, 0x8));
             if (Text2 != null) list.Add(new CHNKRecord(Text2, 0x10));

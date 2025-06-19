@@ -31,7 +31,7 @@ namespace MBEPacker.MBE.CHNK
         {
             Text = text;
             Offset = offset;
-            Size = Multiple4Calculator.RoundUp2MultipleOf4(Text.Length);
+            Size = Multiple4Calculator.RoundUp2MultipleOf4(Text.Length, 2);
         }
 
         public void WriteMBE(FileStream fStream)

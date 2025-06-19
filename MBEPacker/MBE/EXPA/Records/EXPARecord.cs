@@ -24,6 +24,10 @@ namespace MBEPacker.MBE.EXPA.Records
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText(rawRecord, cRecords);
                 case (EXPARecordLayoutType.TEXT_DECISION): return new EXPARecordTextDecision(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_EVENT_INFO): return new EXPARecordDataEventInfo(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_SET): return new EXPARecordDataEventProgressSet(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_INFO): return new EXPARecordDataEventProgressInfo(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition(rawRecord, cRecords);
                 default: throw new Exception("The packer does not support this layout");
             }
             
@@ -36,6 +40,10 @@ namespace MBEPacker.MBE.EXPA.Records
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText().GetRawRecord().Length;
                 case (EXPARecordLayoutType.TEXT_DECISION): return new EXPARecordTextDecision().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_EVENT_INFO): return new EXPARecordDataEventInfo().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_SET): return new EXPARecordDataEventProgressSet().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_INFO): return new EXPARecordDataEventProgressInfo().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
@@ -47,21 +55,17 @@ namespace MBEPacker.MBE.EXPA.Records
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText(json);
                 case (EXPARecordLayoutType.TEXT_DECISION): return new EXPARecordTextDecision(json);
+                case (EXPARecordLayoutType.DATA_EVENT_INFO): return new EXPARecordDataEventInfo(json);
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_SET): return new EXPARecordDataEventProgressSet(json);
+                case (EXPARecordLayoutType.DATA_EVENT_PROGRESS_INFO): return new EXPARecordDataEventProgressInfo(json);
+                case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition(json);
                 default: throw new Exception("The packer does not support this layout");
             }
             return new EXPARecordText(json);
         }
 
-        public virtual byte[] GetRawRecord()
-        {
-            return new byte[] { };
-        }
-
-        public virtual List<CHNKRecord> GenerateChunks()
-        {
-            return new List<CHNKRecord>();
-        }
-
+        public abstract byte[] GetRawRecord();
+        public abstract List<CHNKRecord> GenerateChunks();
         public abstract JsonObject GetJson();
 
     }

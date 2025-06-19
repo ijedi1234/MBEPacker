@@ -12,7 +12,6 @@ namespace MBEPacker.MBE.EXPA.Records
     {
 
         public int ID { get; set; } = 0;
-
         public string? Text1 { get; set; }
         public string? Text2 { get; set; }
         public string? Text3 { get; set; }
@@ -79,7 +78,7 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public override List<CHNKRecord> GenerateChunks()
         {
-            List<CHNKRecord> list = base.GenerateChunks();
+            List<CHNKRecord> list = new List<CHNKRecord>();
             if (Text1 != null) list.Add(new CHNKRecord(Text1, 0x8));
             if (Text2 != null) list.Add(new CHNKRecord(Text2, 0x10));
             if (Text3 != null) list.Add(new CHNKRecord(Text3, 0x18));

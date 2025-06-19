@@ -10,9 +10,9 @@ namespace MBEPacker
     {
 
         //Round to next multiple of four, while leaving space for 2 mull terminators.
-        public static int RoundUp2MultipleOf4(int number)
+        public static int RoundUp2MultipleOf4(int number, int padding)
         {
-            number += 2;
+            number += padding;
             while (number % 4 != 0) number++;
             return number;
         }

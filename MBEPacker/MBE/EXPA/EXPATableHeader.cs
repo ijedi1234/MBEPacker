@@ -50,7 +50,7 @@ namespace MBEPacker.MBE.EXPA
         public EXPATableHeader(string name, JsonObject json)
         {
             Name = name;
-            NameSize = Multiple4Calculator.RoundUp2MultipleOf4(Name.Length);
+            NameSize = Multiple4Calculator.RoundUp2MultipleOf4(Name.Length, 1);
             RecordLayout = json["layout"].AsArray().Select(i => (int)i).ToList();
             RecordLayoutCount = RecordLayout.Count;
             RecordSize = EXPARecord.GetExpectedSize(RecordLayout);

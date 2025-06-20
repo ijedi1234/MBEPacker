@@ -92,7 +92,6 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public override byte[] GetRawRecord()
         {
-            byte[] bytesID = BitConverter.GetBytes(Value1);
             byte[] ending = new byte[] { 0xCC, 0xCC, 0xCC, 0xCC };
             byte[] empty8 = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
             List<byte> finalList = new List<byte>();

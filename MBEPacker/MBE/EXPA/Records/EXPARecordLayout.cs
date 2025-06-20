@@ -15,6 +15,8 @@ namespace MBEPacker.MBE.EXPA.Records
         private List<int> DataEventProgressSet = new List<int>() { 2, 2, 2, 2, 2, 9, 2, 2, 8, 8, 2, 2, 9, 2 };
         private List<int> DataEventProgressInfo = new List<int>() { 8, 2, 8, 2, 2, 2, 2, 8, 2, 2 };
         private List<int> DataFieldDayCondition = new List<int>() { 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+        private List<int> DataFieldChapterSelect = new List<int>() { 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+        private List<int> DataFieldChapterSelectJumpInfo = new List<int>() { 2, 2, 8, 2, 2, 2, 8, 8 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -26,6 +28,8 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataEventProgressSet)) LayoutType = EXPARecordLayoutType.DATA_EVENT_PROGRESS_SET;
             else if (layout.SequenceEqual(DataEventProgressInfo)) LayoutType = EXPARecordLayoutType.DATA_EVENT_PROGRESS_INFO;
             else if (layout.SequenceEqual(DataFieldDayCondition)) LayoutType = EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION;
+            else if (layout.SequenceEqual(DataFieldChapterSelect)) LayoutType = EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT;
+            else if (layout.SequenceEqual(DataFieldChapterSelectJumpInfo)) LayoutType = EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

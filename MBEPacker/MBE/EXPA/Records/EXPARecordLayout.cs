@@ -15,7 +15,7 @@ namespace MBEPacker.MBE.EXPA.Records
         private List<int> DataEventProgressSet = new List<int>() { 2, 2, 2, 2, 2, 9, 2, 2, 8, 8, 2, 2, 9, 2 };
         private List<int> DataEventProgressInfo = new List<int>() { 8, 2, 8, 2, 2, 2, 2, 8, 2, 2 };
         private List<int> DataFieldDayCondition = new List<int>() { 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-        private List<int> DataFieldChapterSelect = new List<int>() { 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+        private List<int> DataFieldChapterSelect = new List<int>() { 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
         private List<int> DataFieldChapterSelectJumpInfo = new List<int>() { 2, 2, 8, 2, 2, 2, 8, 8 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }

@@ -18,9 +18,9 @@ namespace MBEPacker.MBE.EXPA.Records
         public int Value4 { get; set; }
         public string? RefID3 { get; set; }
         public string? RefID4 { get; set; }
-        public int Value5 { get; set; }
+        public int Day { get; set; }
         public int Value6 { get; set; }
-        public int Value7 { get; set; }
+        public int StoryProgress { get; set; }
 
         public EXPARecordDataEventInfo() : base() { }
 
@@ -30,9 +30,9 @@ namespace MBEPacker.MBE.EXPA.Records
             Value2 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
             Value3 = BitConverter.ToInt32(rawRecord.Skip(0x18).Take(sizeof(int)).ToArray());
             Value4 = BitConverter.ToInt32(rawRecord.Skip(0x1C).Take(sizeof(int)).ToArray());
-            Value5 = BitConverter.ToInt32(rawRecord.Skip(0x30).Take(sizeof(int)).ToArray());
+            Day = BitConverter.ToInt32(rawRecord.Skip(0x30).Take(sizeof(int)).ToArray());
             Value6 = BitConverter.ToInt32(rawRecord.Skip(0x34).Take(sizeof(int)).ToArray());
-            Value7 = BitConverter.ToInt32(rawRecord.Skip(0x38).Take(sizeof(int)).ToArray());
+            StoryProgress = BitConverter.ToInt32(rawRecord.Skip(0x38).Take(sizeof(int)).ToArray());
             foreach (CHNKRecordRelativeOffset cRecord in cRecords)
             {
                 switch (cRecord.Offset)
@@ -55,9 +55,9 @@ namespace MBEPacker.MBE.EXPA.Records
             Value4 = json["Value4"].AsValue().GetValue<int>();
             if (json["RefID3"] == null) { RefID3 = null; } else { RefID3 = (string)json["RefID3"]; }
             if (json["RefID4"] == null) { RefID4 = null; } else { RefID4 = (string)json["RefID4"]; }
-            Value5 = json["Value5"].AsValue().GetValue<int>();
+            Day = json["Day"].AsValue().GetValue<int>();
             Value6 = json["Value6"].AsValue().GetValue<int>();
-            Value7 = json["Value7"].AsValue().GetValue<int>();
+            StoryProgress = json["StoryProgress"].AsValue().GetValue<int>();
         }
 
         public override JsonObject GetJson()
@@ -71,9 +71,9 @@ namespace MBEPacker.MBE.EXPA.Records
             json["Value4"] = Value4;
             json["RefID3"] = RefID3;
             json["RefID4"] = RefID4;
-            json["Value5"] = Value5;
+            json["Day"] = Day;
             json["Value6"] = Value6;
-            json["Value7"] = Value7;
+            json["StoryProgress"] = StoryProgress;
             return json;
         }
 
@@ -91,9 +91,9 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(Value4));
             finalList.AddRange(empty8);
             finalList.AddRange(empty8);
-            finalList.AddRange(BitConverter.GetBytes(Value5));
+            finalList.AddRange(BitConverter.GetBytes(Day));
             finalList.AddRange(BitConverter.GetBytes(Value6));
-            finalList.AddRange(BitConverter.GetBytes(Value7));
+            finalList.AddRange(BitConverter.GetBytes(StoryProgress));
             finalList.AddRange(ending);
             return finalList.ToArray();
         }

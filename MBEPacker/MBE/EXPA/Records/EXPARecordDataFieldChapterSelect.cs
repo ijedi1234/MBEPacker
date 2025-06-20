@@ -13,10 +13,10 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public int Value1 { get; set; }
         public int Value2 { get; set; }
-        public int Value3 { get; set; }
+        public int Day { get; set; }
         public int Value4 { get; set; }
         public int Value5 { get; set; }
-        public string? Text1 { get; set; }
+        public string? Route { get; set; }
         public int Value6 { get; set; }
         public int Value7 { get; set; }
         public int Value8 { get; set; }
@@ -31,6 +31,8 @@ namespace MBEPacker.MBE.EXPA.Records
         public int Value17 { get; set; }
         public int Value18 { get; set; }
         public int Value19 { get; set; }
+        public int Value20 { get; set; }
+        public int Value21 { get; set; }
 
         public EXPARecordDataFieldChapterSelect() : base() { }
 
@@ -38,7 +40,7 @@ namespace MBEPacker.MBE.EXPA.Records
         {
             Value1 = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
             Value2 = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
-            Value3 = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
+            Day = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
             Value4 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
             Value5 = BitConverter.ToInt32(rawRecord.Skip(0x10).Take(sizeof(int)).ToArray());
             Value6 = BitConverter.ToInt32(rawRecord.Skip(0x20).Take(sizeof(int)).ToArray());
@@ -55,11 +57,13 @@ namespace MBEPacker.MBE.EXPA.Records
             Value17 = BitConverter.ToInt32(rawRecord.Skip(0x4C).Take(sizeof(int)).ToArray());
             Value18 = BitConverter.ToInt32(rawRecord.Skip(0x50).Take(sizeof(int)).ToArray());
             Value19 = BitConverter.ToInt32(rawRecord.Skip(0x54).Take(sizeof(int)).ToArray());
+            Value20 = BitConverter.ToInt32(rawRecord.Skip(0x58).Take(sizeof(int)).ToArray());
+            Value21 = BitConverter.ToInt32(rawRecord.Skip(0x5C).Take(sizeof(int)).ToArray());
             foreach (CHNKRecordRelativeOffset cRecord in cRecords)
             {
                 switch (cRecord.Offset)
                 {
-                    case 0x18: Text1 = cRecord.Text; break;
+                    case 0x18: Route = cRecord.Text; break;
                 }
             }
         }
@@ -68,10 +72,10 @@ namespace MBEPacker.MBE.EXPA.Records
         {
             Value1 = json["Value1"].AsValue().GetValue<int>();
             Value2 = json["Value2"].AsValue().GetValue<int>();
-            Value3 = json["Value3"].AsValue().GetValue<int>();
+            Day = json["Day"].AsValue().GetValue<int>();
             Value4 = json["Value4"].AsValue().GetValue<int>();
             Value5 = json["Value5"].AsValue().GetValue<int>();
-            if (json["Text1"] == null) { Text1 = null; } else { Text1 = (string)json["Text1"]; }
+            if (json["Route"] == null) { Route = null; } else { Route = (string)json["Route"]; }
             Value6 = json["Value6"].AsValue().GetValue<int>();
             Value7 = json["Value7"].AsValue().GetValue<int>();
             Value8 = json["Value8"].AsValue().GetValue<int>();
@@ -86,6 +90,8 @@ namespace MBEPacker.MBE.EXPA.Records
             Value17 = json["Value17"].AsValue().GetValue<int>();
             Value18 = json["Value18"].AsValue().GetValue<int>();
             Value19 = json["Value19"].AsValue().GetValue<int>();
+            Value20 = json["Value20"].AsValue().GetValue<int>();
+            Value21 = json["Value21"].AsValue().GetValue<int>();
         }
 
         public override JsonObject GetJson()
@@ -93,10 +99,10 @@ namespace MBEPacker.MBE.EXPA.Records
             JsonObject json = new JsonObject();
             json["Value1"] = Value1;
             json["Value2"] = Value2;
-            json["Value3"] = Value3;
+            json["Day"] = Day;
             json["Value4"] = Value4;
             json["Value5"] = Value5;
-            json["Text1"] = Text1;
+            json["Route"] = Route;
             json["Value6"] = Value6;
             json["Value7"] = Value7;
             json["Value8"] = Value8;
@@ -111,6 +117,8 @@ namespace MBEPacker.MBE.EXPA.Records
             json["Value17"] = Value17;
             json["Value18"] = Value18;
             json["Value19"] = Value19;
+            json["Value20"] = Value20;
+            json["Value21"] = Value21;
             return json;
         }
 
@@ -121,7 +129,7 @@ namespace MBEPacker.MBE.EXPA.Records
             List<byte> finalList = new List<byte>();
             finalList.AddRange(BitConverter.GetBytes(Value1));
             finalList.AddRange(BitConverter.GetBytes(Value2));
-            finalList.AddRange(BitConverter.GetBytes(Value3));
+            finalList.AddRange(BitConverter.GetBytes(Day));
             finalList.AddRange(BitConverter.GetBytes(Value4));
             finalList.AddRange(BitConverter.GetBytes(Value5));
             finalList.AddRange(intermission);
@@ -140,13 +148,15 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(Value17));
             finalList.AddRange(BitConverter.GetBytes(Value18));
             finalList.AddRange(BitConverter.GetBytes(Value19));
+            finalList.AddRange(BitConverter.GetBytes(Value20));
+            finalList.AddRange(BitConverter.GetBytes(Value21));
             return finalList.ToArray();
         }
 
         public override List<CHNKRecord> GenerateChunks()
         {
             List<CHNKRecord> list = new List<CHNKRecord>();
-            if (Text1 != null) list.Add(new CHNKRecord(Text1, 0x18));
+            if (Route != null) list.Add(new CHNKRecord(Route, 0x18));
             return list;
         }
     }

@@ -10,14 +10,14 @@ namespace MBEPacker.MBE.EXPA.Records
 {
     public class EXPARecordDataEventInfo : EXPARecord
     {
-        public string? RefID1 { get; set; }
+        public string? LuaFile { get; set; }
         public int Value1 { get; set; }
         public int Value2 { get; set; }
         public string? RefID2 { get; set; }
-        public int Value3 { get; set; }
+        public int DayConditionKey { get; set; }
         public int Value4 { get; set; }
-        public string? RefID3 { get; set; }
-        public string? RefID4 { get; set; }
+        public string? ProgSetFile { get; set; }
+        public string? ProgInfoFile { get; set; }
         public int Day { get; set; }
         public int Value6 { get; set; }
         public int StoryProgress { get; set; }
@@ -28,7 +28,7 @@ namespace MBEPacker.MBE.EXPA.Records
         {
             Value1 = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
             Value2 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
-            Value3 = BitConverter.ToInt32(rawRecord.Skip(0x18).Take(sizeof(int)).ToArray());
+            DayConditionKey = BitConverter.ToInt32(rawRecord.Skip(0x18).Take(sizeof(int)).ToArray());
             Value4 = BitConverter.ToInt32(rawRecord.Skip(0x1C).Take(sizeof(int)).ToArray());
             Day = BitConverter.ToInt32(rawRecord.Skip(0x30).Take(sizeof(int)).ToArray());
             Value6 = BitConverter.ToInt32(rawRecord.Skip(0x34).Take(sizeof(int)).ToArray());
@@ -37,24 +37,24 @@ namespace MBEPacker.MBE.EXPA.Records
             {
                 switch (cRecord.Offset)
                 {
-                    case 0x0: RefID1 = cRecord.Text; break;
+                    case 0x0: LuaFile = cRecord.Text; break;
                     case 0x10: RefID2 = cRecord.Text; break;
-                    case 0x20: RefID3 = cRecord.Text; break;
-                    case 0x28: RefID4 = cRecord.Text; break;
+                    case 0x20: ProgSetFile = cRecord.Text; break;
+                    case 0x28: ProgInfoFile = cRecord.Text; break;
                 }
             }
         }
 
         public EXPARecordDataEventInfo(JsonObject json) : base(json)
         {
-            if (json["RefID1"] == null) { RefID1 = null; } else { RefID1 = (string)json["RefID1"]; }
+            if (json["LuaFile"] == null) { LuaFile = null; } else { LuaFile = (string)json["LuaFile"]; }
             Value1 = json["Value1"].AsValue().GetValue<int>();
             Value2 = json["Value2"].AsValue().GetValue<int>();
             if (json["RefID2"] == null) { RefID2 = null; } else { RefID2 = (string)json["RefID2"]; }
-            Value3 = json["Value3"].AsValue().GetValue<int>();
+            DayConditionKey = json["DayConditionKey"].AsValue().GetValue<int>();
             Value4 = json["Value4"].AsValue().GetValue<int>();
-            if (json["RefID3"] == null) { RefID3 = null; } else { RefID3 = (string)json["RefID3"]; }
-            if (json["RefID4"] == null) { RefID4 = null; } else { RefID4 = (string)json["RefID4"]; }
+            if (json["ProgSetFile"] == null) { ProgSetFile = null; } else { ProgSetFile = (string)json["ProgSetFile"]; }
+            if (json["ProgInfoFile"] == null) { ProgInfoFile = null; } else { ProgInfoFile = (string)json["ProgInfoFile"]; }
             Day = json["Day"].AsValue().GetValue<int>();
             Value6 = json["Value6"].AsValue().GetValue<int>();
             StoryProgress = json["StoryProgress"].AsValue().GetValue<int>();
@@ -63,14 +63,14 @@ namespace MBEPacker.MBE.EXPA.Records
         public override JsonObject GetJson()
         {
             JsonObject json = new JsonObject();
-            json["RefID1"] = RefID1;
+            json["LuaFile"] = LuaFile;
             json["Value1"] = Value1;
             json["Value2"] = Value2;
             json["RefID2"] = RefID2;
-            json["Value3"] = Value3;
+            json["DayConditionKey"] = DayConditionKey;
             json["Value4"] = Value4;
-            json["RefID3"] = RefID3;
-            json["RefID4"] = RefID4;
+            json["ProgSetFile"] = ProgSetFile;
+            json["ProgInfoFile"] = ProgInfoFile;
             json["Day"] = Day;
             json["Value6"] = Value6;
             json["StoryProgress"] = StoryProgress;
@@ -87,7 +87,7 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(Value1));
             finalList.AddRange(BitConverter.GetBytes(Value2));
             finalList.AddRange(empty8);
-            finalList.AddRange(BitConverter.GetBytes(Value3));
+            finalList.AddRange(BitConverter.GetBytes(DayConditionKey));
             finalList.AddRange(BitConverter.GetBytes(Value4));
             finalList.AddRange(empty8);
             finalList.AddRange(empty8);
@@ -101,10 +101,10 @@ namespace MBEPacker.MBE.EXPA.Records
         public override List<CHNKRecord> GenerateChunks()
         {
             List<CHNKRecord> list = new List<CHNKRecord>();
-            if (RefID1 != null) list.Add(new CHNKRecord(RefID1, 0x0));
+            if (LuaFile != null) list.Add(new CHNKRecord(LuaFile, 0x0));
             if (RefID2 != null) list.Add(new CHNKRecord(RefID2, 0x10));
-            if (RefID3 != null) list.Add(new CHNKRecord(RefID3, 0x20));
-            if (RefID4 != null) list.Add(new CHNKRecord(RefID4, 0x28));
+            if (ProgSetFile != null) list.Add(new CHNKRecord(ProgSetFile, 0x20));
+            if (ProgInfoFile != null) list.Add(new CHNKRecord(ProgInfoFile, 0x28));
             return list;
         }
     }

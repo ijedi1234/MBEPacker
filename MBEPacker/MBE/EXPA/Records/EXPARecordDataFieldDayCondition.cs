@@ -11,7 +11,7 @@ namespace MBEPacker.MBE.EXPA.Records
     public class EXPARecordDataFieldDayCondition : EXPARecord
     {
 
-        public int Value1 { get; set; }
+        public int Key { get; set; }
         public int Day { get; set; }
         public int TimeOfDay { get; set; }
         public int Value4 { get; set; }
@@ -40,7 +40,7 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public EXPARecordDataFieldDayCondition(byte[] rawRecord, List<CHNKRecordRelativeOffset> cRecords) : base(rawRecord)
         {
-            Value1 = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
+            Key = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
             Day = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
             TimeOfDay = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
             Value4 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
@@ -74,7 +74,7 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public EXPARecordDataFieldDayCondition(JsonObject json) : base(json)
         {
-            Value1 = json["Value1"].AsValue().GetValue<int>();
+            Key = json["Key"].AsValue().GetValue<int>();
             Day = json["Day"].AsValue().GetValue<int>();
             TimeOfDay = json["TimeOfDay"].AsValue().GetValue<int>();
             Value4 = json["Value4"].AsValue().GetValue<int>();
@@ -103,7 +103,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public override JsonObject GetJson()
         {
             JsonObject json = new JsonObject();
-            json["Value1"] = Value1;
+            json["Key"] = Key;
             json["Day"] = Day;
             json["TimeOfDay"] = TimeOfDay;
             json["Value4"] = Value4;
@@ -135,7 +135,7 @@ namespace MBEPacker.MBE.EXPA.Records
             byte[] intermission = new byte[] { 0xCC, 0xCC, 0xCC, 0xCC };
             byte[] empty8 = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
             List<byte> finalList = new List<byte>();
-            finalList.AddRange(BitConverter.GetBytes(Value1));
+            finalList.AddRange(BitConverter.GetBytes(Key));
             finalList.AddRange(BitConverter.GetBytes(Day));
             finalList.AddRange(BitConverter.GetBytes(TimeOfDay));
             finalList.AddRange(BitConverter.GetBytes(Value4));

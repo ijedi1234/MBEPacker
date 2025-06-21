@@ -26,7 +26,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public int Lose3ID { get; set; }
         public int Win4ID { get; set; }
         public int Lose4ID { get; set; }
-        public int Value14 { get; set; }
+        public int DontShowResults { get; set; }
         public int Value15 { get; set; }
         public int Value16 { get; set; }
         public int Value17 { get; set; }
@@ -35,7 +35,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public int BPGain { get; set; }
         public int ExplFlag { get; set; }
         public int Value22 { get; set; }
-        public int Value23 { get; set; }
+        public int AP { get; set; }
         public int Value24 { get; set; }
         public int Value25 { get; set; }
         public int Value26 { get; set; }
@@ -59,7 +59,7 @@ namespace MBEPacker.MBE.EXPA.Records
             Lose3ID = BitConverter.ToInt32(rawRecord.Skip(0x38).Take(sizeof(int)).ToArray());
             Win4ID = BitConverter.ToInt32(rawRecord.Skip(0x3C).Take(sizeof(int)).ToArray());
             Lose4ID = BitConverter.ToInt32(rawRecord.Skip(0x40).Take(sizeof(int)).ToArray());
-            Value14 = BitConverter.ToInt32(rawRecord.Skip(0x44).Take(sizeof(int)).ToArray());
+            DontShowResults = BitConverter.ToInt32(rawRecord.Skip(0x44).Take(sizeof(int)).ToArray());
             Value15 = BitConverter.ToInt32(rawRecord.Skip(0x48).Take(sizeof(int)).ToArray());
             Value16 = BitConverter.ToInt32(rawRecord.Skip(0x4C).Take(sizeof(int)).ToArray());
             Value17 = BitConverter.ToInt32(rawRecord.Skip(0x50).Take(sizeof(int)).ToArray());
@@ -68,7 +68,7 @@ namespace MBEPacker.MBE.EXPA.Records
             BPGain = BitConverter.ToInt32(rawRecord.Skip(0x5C).Take(sizeof(int)).ToArray());
             ExplFlag = BitConverter.ToInt32(rawRecord.Skip(0x60).Take(sizeof(int)).ToArray());
             Value22 = BitConverter.ToInt32(rawRecord.Skip(0x64).Take(sizeof(int)).ToArray());
-            Value23 = BitConverter.ToInt32(rawRecord.Skip(0x68).Take(sizeof(int)).ToArray());
+            AP = BitConverter.ToInt32(rawRecord.Skip(0x68).Take(sizeof(int)).ToArray());
             Value24 = BitConverter.ToInt32(rawRecord.Skip(0x6C).Take(sizeof(int)).ToArray());
             Value25 = BitConverter.ToInt32(rawRecord.Skip(0x70).Take(sizeof(int)).ToArray());
             Value26 = BitConverter.ToInt32(rawRecord.Skip(0x74).Take(sizeof(int)).ToArray());
@@ -100,7 +100,7 @@ namespace MBEPacker.MBE.EXPA.Records
             Lose3ID = json["Lose3ID"].AsValue().GetValue<int>();
             Win4ID = json["Win4ID"].AsValue().GetValue<int>();
             Lose4ID = json["Lose4ID"].AsValue().GetValue<int>();
-            Value14 = json["Value14"].AsValue().GetValue<int>();
+            DontShowResults = json["DontShowResults"].AsValue().GetValue<int>();
             Value15 = json["Value15"].AsValue().GetValue<int>();
             Value16 = json["Value16"].AsValue().GetValue<int>();
             Value17 = json["Value17"].AsValue().GetValue<int>();
@@ -109,7 +109,7 @@ namespace MBEPacker.MBE.EXPA.Records
             BPGain = json["BPGain"].AsValue().GetValue<int>();
             ExplFlag = json["ExplFlag"].AsValue().GetValue<int>();
             Value22 = json["Value22"].AsValue().GetValue<int>();
-            Value23 = json["Value23"].AsValue().GetValue<int>();
+            AP = json["AP"].AsValue().GetValue<int>();
             Value24 = json["Value24"].AsValue().GetValue<int>();
             Value25 = json["Value25"].AsValue().GetValue<int>();
             Value26 = json["Value26"].AsValue().GetValue<int>();
@@ -134,7 +134,7 @@ namespace MBEPacker.MBE.EXPA.Records
             json["Lose3ID"] = Lose3ID;
             json["Win4ID"] = Win4ID;
             json["Lose4ID"] = Lose4ID;
-            json["Value14"] = Value14;
+            json["DontShowResults"] = DontShowResults;
             json["Value15"] = Value15;
             json["Value16"] = Value16;
             json["Value17"] = Value17;
@@ -143,7 +143,7 @@ namespace MBEPacker.MBE.EXPA.Records
             json["BPGain"] = BPGain;
             json["ExplFlag"] = ExplFlag;
             json["Value22"] = Value22;
-            json["Value23"] = Value23;
+            json["AP"] = AP;
             json["Value24"] = Value24;
             json["Value25"] = Value25;
             json["Value26"] = Value26;
@@ -171,7 +171,7 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(Lose3ID));
             finalList.AddRange(BitConverter.GetBytes(Win4ID));
             finalList.AddRange(BitConverter.GetBytes(Lose4ID));
-            finalList.AddRange(BitConverter.GetBytes(Value14));
+            finalList.AddRange(BitConverter.GetBytes(DontShowResults));
             finalList.AddRange(BitConverter.GetBytes(Value15));
             finalList.AddRange(BitConverter.GetBytes(Value16));
             finalList.AddRange(BitConverter.GetBytes(Value17));
@@ -180,7 +180,7 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(BPGain));
             finalList.AddRange(BitConverter.GetBytes(ExplFlag));
             finalList.AddRange(BitConverter.GetBytes(Value22));
-            finalList.AddRange(BitConverter.GetBytes(Value23));
+            finalList.AddRange(BitConverter.GetBytes(AP));
             finalList.AddRange(BitConverter.GetBytes(Value24));
             finalList.AddRange(BitConverter.GetBytes(Value25));
             finalList.AddRange(BitConverter.GetBytes(Value26));

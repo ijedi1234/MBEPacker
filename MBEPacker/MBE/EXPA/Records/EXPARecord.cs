@@ -30,6 +30,8 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition(rawRecord, cRecords);
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT): return new EXPARecordDataFieldChapterSelect(rawRecord, cRecords);
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO): return new EXPARecordDataFieldChapterSelectJumpInfo(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU): return new EXPARecordDataUIVRBattleMenu(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_BATTLE_ID): return new EXPARecordDataBattleID(rawRecord, cRecords);
                 default: throw new Exception("The packer does not support this layout");
             }
             
@@ -48,6 +50,8 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT): return new EXPARecordDataFieldChapterSelect().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO): return new EXPARecordDataFieldChapterSelectJumpInfo().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU): return new EXPARecordDataUIVRBattleMenu().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_ID): return new EXPARecordDataBattleID().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
@@ -65,6 +69,8 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION): return new EXPARecordDataFieldDayCondition(json);
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT): return new EXPARecordDataFieldChapterSelect(json);
                 case (EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO): return new EXPARecordDataFieldChapterSelectJumpInfo(json);
+                case (EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU): return new EXPARecordDataUIVRBattleMenu(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_ID): return new EXPARecordDataBattleID(json);
                 default: throw new Exception("The packer does not support this layout");
             }
             return new EXPARecordText(json);

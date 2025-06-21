@@ -16,6 +16,8 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_EVENT_PROGRESS_INFO = 5, // data/event_progress_info_s14_0_00.mbe
         DATA_FIELD_DAY_CONDITION = 6, // data/field_day_condition.mbe
         DATA_FIELD_CHAPTER_SELECT = 7, // data/field_chapter_select.mbe
-        DATA_FIELD_CHAPTER_SELECT_JUMP_INFO = 8 // data/field_chapter_select.mbe
+        DATA_FIELD_CHAPTER_SELECT_JUMP_INFO = 8, // data/field_chapter_select.mbe
+        DATA_UI_VR_BATTLE_MENU = 9, // data/ui_vr_battle_menu.mbe
+        DATA_BATTLE_ID = 10 // data/battle_id.mbe
     }
 }

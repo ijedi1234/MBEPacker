@@ -17,6 +17,8 @@ namespace MBEPacker.MBE.EXPA.Records
         private List<int> DataFieldDayCondition = new List<int>() { 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
         private List<int> DataFieldChapterSelect = new List<int>() { 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
         private List<int> DataFieldChapterSelectJumpInfo = new List<int>() { 2, 2, 8, 2, 2, 2, 8, 8 };
+        private List<int> DataUIVRBattleMenu = new List<int>() { 2, 2, 2, 2, 2, 2, 8, 2 };
+        public List<int> DataBattleID = new List<int>() { 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 9, 9, 9 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -30,6 +32,8 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataFieldDayCondition)) LayoutType = EXPARecordLayoutType.DATA_FIELD_DAY_CONDITION;
             else if (layout.SequenceEqual(DataFieldChapterSelect)) LayoutType = EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT;
             else if (layout.SequenceEqual(DataFieldChapterSelectJumpInfo)) LayoutType = EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO;
+            else if (layout.SequenceEqual(DataUIVRBattleMenu)) LayoutType = EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU;
+            else if (layout.SequenceEqual(DataBattleID)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_ID;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

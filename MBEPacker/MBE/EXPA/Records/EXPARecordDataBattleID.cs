@@ -12,10 +12,10 @@ namespace MBEPacker.MBE.EXPA.Records
     {
 
         public int ID { get; set; }
-        public int Value2 { get; set; }
+        public int MapID { get; set; }
         public int PlayerMovesFirst { get; set; }
         public int Value4 { get; set; }
-        public string? Text1 { get; set; }
+        public string? BPFile { get; set; }
         public string? LuaFile { get; set; }
         public int Value5 { get; set; }
         public int Win1ID { get; set; }
@@ -47,7 +47,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public EXPARecordDataBattleID(byte[] rawRecord, List<CHNKRecordRelativeOffset> cRecords) : base(rawRecord)
         {
             ID = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
-            Value2 = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
+            MapID = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
             PlayerMovesFirst = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
             Value4 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
             Value5 = BitConverter.ToInt32(rawRecord.Skip(0x20).Take(sizeof(int)).ToArray());
@@ -77,7 +77,7 @@ namespace MBEPacker.MBE.EXPA.Records
             {
                 switch (cRecord.Offset)
                 {
-                    case 0x10: Text1 = cRecord.Text; break;
+                    case 0x10: BPFile = cRecord.Text; break;
                     case 0x18: LuaFile = cRecord.Text; break;
                 }
             }
@@ -86,10 +86,10 @@ namespace MBEPacker.MBE.EXPA.Records
         public EXPARecordDataBattleID(JsonObject json) : base(json)
         {
             ID = json["ID"].AsValue().GetValue<int>();
-            Value2 = json["Value2"].AsValue().GetValue<int>();
+            MapID = json["MapID"].AsValue().GetValue<int>();
             PlayerMovesFirst = json["PlayerMovesFirst"].AsValue().GetValue<int>();
             Value4 = json["Value4"].AsValue().GetValue<int>();
-            if (json["Text1"] == null) { Text1 = null; } else { Text1 = (string)json["Text1"]; }
+            if (json["BPFile"] == null) { BPFile = null; } else { BPFile = (string)json["BPFile"]; }
             if (json["LuaFile"] == null) { LuaFile = null; } else { LuaFile = (string)json["LuaFile"]; }
             Value5 = json["Value5"].AsValue().GetValue<int>();
             Win1ID = json["Win1ID"].AsValue().GetValue<int>();
@@ -120,10 +120,10 @@ namespace MBEPacker.MBE.EXPA.Records
         {
             JsonObject json = new JsonObject();
             json["ID"] = ID;
-            json["Value2"] = Value2;
+            json["MapID"] = MapID;
             json["PlayerMovesFirst"] = PlayerMovesFirst;
             json["Value4"] = Value4;
-            json["Text1"] = Text1;
+            json["BPFile"] = BPFile;
             json["LuaFile"] = LuaFile;
             json["Value5"] = Value5;
             json["Win1ID"] = Win1ID;
@@ -157,7 +157,7 @@ namespace MBEPacker.MBE.EXPA.Records
             byte[] empty8 = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
             List<byte> finalList = new List<byte>();
             finalList.AddRange(BitConverter.GetBytes(ID));
-            finalList.AddRange(BitConverter.GetBytes(Value2));
+            finalList.AddRange(BitConverter.GetBytes(MapID));
             finalList.AddRange(BitConverter.GetBytes(PlayerMovesFirst));
             finalList.AddRange(BitConverter.GetBytes(Value4));
             finalList.AddRange(empty8);
@@ -192,7 +192,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public override List<CHNKRecord> GenerateChunks()
         {
             List<CHNKRecord> list = new List<CHNKRecord>();
-            if (Text1 != null) list.Add(new CHNKRecord(Text1, 0x10));
+            if (BPFile != null) list.Add(new CHNKRecord(BPFile, 0x10));
             if (LuaFile != null) list.Add(new CHNKRecord(LuaFile, 0x18));
             return list;
         }

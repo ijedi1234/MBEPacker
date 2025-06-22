@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Compile battle id</ActiveDebugProfile>
+    <ActiveDebugProfile>Decompile battle id</ActiveDebugProfile>
     <_LastSelectedProfileId>G:\VS22\MBEPacker\MBEPacker\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

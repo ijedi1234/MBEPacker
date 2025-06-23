@@ -37,6 +37,7 @@ namespace MBEPacker.MBE.EXPA
             }
             fStream.Read(bytes4, 0, sizeof(int));
             RecordSize = BitConverter.ToInt32(bytes4);
+            if (RecordSize % 8 != 0) RecordSize += 8 - (RecordSize % 8);
             fStream.Read(bytes4, 0, sizeof(int));
             NumRecords = BitConverter.ToInt32(bytes4);
             //Ensure 8 alignment for the end of this section

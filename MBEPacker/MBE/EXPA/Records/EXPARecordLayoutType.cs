@@ -18,6 +18,10 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_FIELD_CHAPTER_SELECT = 7, // data/field_chapter_select.mbe
         DATA_FIELD_CHAPTER_SELECT_JUMP_INFO = 8, // data/field_chapter_select.mbe
         DATA_UI_VR_BATTLE_MENU = 9, // data/ui_vr_battle_menu.mbe
-        DATA_BATTLE_ID = 10 // data/battle_id.mbe
+        DATA_BATTLE_ID = 10, // data/battle_id.mbe
+        DATA_BP_PLACE_ID = 11, // data/bp_vr_battle_st07.mbe
+        DATA_BP_PLACE_ID_UI = 12, // data/bp_vr_battle_st07.mbe
+        DATA_BP_LOTTERY_GROUP_ID = 13, // data/bp_vr_battle_st07.mbe
+        DATA_BP_POSITION = 14 // data/bp_vr_battle_st07.mbe
     }
 }

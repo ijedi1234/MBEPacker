@@ -19,6 +19,20 @@ namespace MBEPacker.MBE.EXPA.Records
         private List<int> DataFieldChapterSelectJumpInfo = new List<int>() { 2, 2, 8, 2, 2, 2, 8, 8 };
         private List<int> DataUIVRBattleMenu = new List<int>() { 2, 2, 2, 2, 2, 2, 8, 2 };
         public List<int> DataBattleID = new List<int>() { 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 9, 9, 9 };
+        public List<int> DataPlaceID = new List<int>() { 2, 2, 2, 2, 2, 2, 2 };
+        public List<int> DataPlaceIDUI = new List<int>() { 2, 2, 2 };
+        public List<int> DataLotteryGroupID = new List<int>() { 2, 2, 2, 2, 2 };
+        public List<int> DataPosition = new List<int>() 
+        { 2,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+        };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -34,6 +48,10 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataFieldChapterSelectJumpInfo)) LayoutType = EXPARecordLayoutType.DATA_FIELD_CHAPTER_SELECT_JUMP_INFO;
             else if (layout.SequenceEqual(DataUIVRBattleMenu)) LayoutType = EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU;
             else if (layout.SequenceEqual(DataBattleID)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_ID;
+            else if (layout.SequenceEqual(DataPlaceID)) LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID;
+            else if (layout.SequenceEqual(DataPlaceIDUI)) LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID_UI;
+            else if (layout.SequenceEqual(DataLotteryGroupID)) LayoutType = EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID;
+            else if (layout.SequenceEqual(DataPosition)) LayoutType = EXPARecordLayoutType.DATA_BP_POSITION;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

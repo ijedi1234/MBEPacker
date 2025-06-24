@@ -13,7 +13,7 @@ namespace MBEPacker.MBE.EXPA.Records
     {
 
         public int PlaceID { get; set; }
-        public int Value2 { get; set; }
+        public int DefaultUnitID { get; set; }
         public int Value3 { get; set; }
         public int LotteryID { get; set; }
         public int TurnBeginMove { get; set; }
@@ -25,7 +25,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public EXPARecordDataBPPlaceID(byte[] rawRecord) : base(rawRecord)
         {
             PlaceID = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
-            Value2 = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
+            DefaultUnitID = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
             Value3 = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
             LotteryID = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
             TurnBeginMove = BitConverter.ToInt32(rawRecord.Skip(0x10).Take(sizeof(int)).ToArray());
@@ -36,7 +36,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public EXPARecordDataBPPlaceID(JsonObject json) : base(json)
         {
             PlaceID = json["PlaceID"].AsValue().GetValue<int>();
-            Value2 = json["Value2"].AsValue().GetValue<int>();
+            DefaultUnitID = json["DefaultUnitID"].AsValue().GetValue<int>();
             Value3 = json["Value3"].AsValue().GetValue<int>();
             LotteryID = json["LotteryID"].AsValue().GetValue<int>();
             TurnBeginMove = json["TurnBeginMove"].AsValue().GetValue<int>();
@@ -48,7 +48,7 @@ namespace MBEPacker.MBE.EXPA.Records
         {
             JsonObject json = new JsonObject();
             json["PlaceID"] = PlaceID;
-            json["Value2"] = Value2;
+            json["DefaultUnitID"] = DefaultUnitID;
             json["Value3"] = Value3;
             json["LotteryID"] = LotteryID;
             json["TurnBeginMove"] = TurnBeginMove;
@@ -62,7 +62,7 @@ namespace MBEPacker.MBE.EXPA.Records
             byte[] ending = new byte[] { 0xCC, 0xCC, 0xCC, 0xCC };
             List<byte> finalList = new List<byte>();
             finalList.AddRange(BitConverter.GetBytes(PlaceID));
-            finalList.AddRange(BitConverter.GetBytes(Value2));
+            finalList.AddRange(BitConverter.GetBytes(DefaultUnitID));
             finalList.AddRange(BitConverter.GetBytes(Value3));
             finalList.AddRange(BitConverter.GetBytes(LotteryID));
             finalList.AddRange(BitConverter.GetBytes(TurnBeginMove));

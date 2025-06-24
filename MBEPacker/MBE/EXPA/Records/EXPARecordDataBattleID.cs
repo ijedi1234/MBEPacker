@@ -14,7 +14,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public int ID { get; set; }
         public int MapID { get; set; }
         public int PlayerMovesFirst { get; set; }
-        public int Value4 { get; set; }
+        public int SkipID { get; set; }
         public string? BPFile { get; set; }
         public string? LuaFile { get; set; }
         public int Value5 { get; set; }
@@ -49,7 +49,7 @@ namespace MBEPacker.MBE.EXPA.Records
             ID = BitConverter.ToInt32(rawRecord.Skip(0x0).Take(sizeof(int)).ToArray());
             MapID = BitConverter.ToInt32(rawRecord.Skip(0x4).Take(sizeof(int)).ToArray());
             PlayerMovesFirst = BitConverter.ToInt32(rawRecord.Skip(0x8).Take(sizeof(int)).ToArray());
-            Value4 = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
+            SkipID = BitConverter.ToInt32(rawRecord.Skip(0xC).Take(sizeof(int)).ToArray());
             Value5 = BitConverter.ToInt32(rawRecord.Skip(0x20).Take(sizeof(int)).ToArray());
             Win1ID = BitConverter.ToInt32(rawRecord.Skip(0x24).Take(sizeof(int)).ToArray());
             Lose1ID = BitConverter.ToInt32(rawRecord.Skip(0x28).Take(sizeof(int)).ToArray());
@@ -88,7 +88,7 @@ namespace MBEPacker.MBE.EXPA.Records
             ID = json["ID"].AsValue().GetValue<int>();
             MapID = json["MapID"].AsValue().GetValue<int>();
             PlayerMovesFirst = json["PlayerMovesFirst"].AsValue().GetValue<int>();
-            Value4 = json["Value4"].AsValue().GetValue<int>();
+            SkipID = json["SkipID"].AsValue().GetValue<int>();
             if (json["BPFile"] == null) { BPFile = null; } else { BPFile = (string)json["BPFile"]; }
             if (json["LuaFile"] == null) { LuaFile = null; } else { LuaFile = (string)json["LuaFile"]; }
             Value5 = json["Value5"].AsValue().GetValue<int>();
@@ -122,7 +122,7 @@ namespace MBEPacker.MBE.EXPA.Records
             json["ID"] = ID;
             json["MapID"] = MapID;
             json["PlayerMovesFirst"] = PlayerMovesFirst;
-            json["Value4"] = Value4;
+            json["SkipID"] = SkipID;
             json["BPFile"] = BPFile;
             json["LuaFile"] = LuaFile;
             json["Value5"] = Value5;
@@ -159,7 +159,7 @@ namespace MBEPacker.MBE.EXPA.Records
             finalList.AddRange(BitConverter.GetBytes(ID));
             finalList.AddRange(BitConverter.GetBytes(MapID));
             finalList.AddRange(BitConverter.GetBytes(PlayerMovesFirst));
-            finalList.AddRange(BitConverter.GetBytes(Value4));
+            finalList.AddRange(BitConverter.GetBytes(SkipID));
             finalList.AddRange(empty8);
             finalList.AddRange(empty8);
             finalList.AddRange(BitConverter.GetBytes(Value5));

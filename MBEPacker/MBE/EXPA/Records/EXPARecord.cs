@@ -36,6 +36,7 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_PLACE_ID_UI): return new EXPARecordDataBPPlaceIDUI(rawRecord);
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID(rawRecord);
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit(rawRecord, cRecords);
                 default: throw new Exception("The packer does not support this layout");
             }
             
@@ -60,6 +61,7 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_PLACE_ID_UI): return new EXPARecordDataBPPlaceIDUI().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
@@ -83,6 +85,7 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_PLACE_ID_UI): return new EXPARecordDataBPPlaceIDUI(json);
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID(json);
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit(json);
                 default: throw new Exception("The packer does not support this layout");
             }
             return new EXPARecordText(json);

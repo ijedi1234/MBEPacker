@@ -22,6 +22,7 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_BP_PLACE_ID = 11, // data/bp_vr_battle_st07.mbe
         DATA_BP_PLACE_ID_UI = 12, // data/bp_vr_battle_st07.mbe
         DATA_BP_LOTTERY_GROUP_ID = 13, // data/bp_vr_battle_st07.mbe
-        DATA_BP_POSITION = 14 // data/bp_vr_battle_st07.mbe
+        DATA_BP_POSITION = 14, // data/bp_vr_battle_st07.mbe
+        DATA_BATTLE_SETTING_UNIT = 15 // data/bp_vr_battle_st07.mbe
     }
 }

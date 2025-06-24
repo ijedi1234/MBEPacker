@@ -33,6 +33,7 @@ namespace MBEPacker.MBE.EXPA.Records
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4
         };
+        public List<int> DataBattleSettingUnit = new List<int>() { 2, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 2, 8, 2, 2, 2 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -52,6 +53,7 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataPlaceIDUI)) LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID_UI;
             else if (layout.SequenceEqual(DataLotteryGroupID)) LayoutType = EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID;
             else if (layout.SequenceEqual(DataPosition)) LayoutType = EXPARecordLayoutType.DATA_BP_POSITION;
+            else if (layout.SequenceEqual(DataBattleSettingUnit)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

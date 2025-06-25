@@ -34,6 +34,9 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_BATTLE_SETTING_BAD_CONDITION = 22, // data/battle_setting.mbe
         DATA_BATTLE_SETTING_CONDITION_EFFECT = 23, // data/battle_setting.mbe
         DATA_BATTLE_SETTING_RANDOM_CONDITION = 24, // data/battle_setting.mbe
-        DATA_BATTLE_SETTING_MAP_SPECIAL_CELL = 25 // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_MAP_SPECIAL_CELL = 25, // data/battle_setting.mbe
+
+        DATA_BATTLE_SKILL_ACT = 26, // data/battle_skill_act.mbe
+        DATA_BATTLE_SHIELD_MODE = 27 // data/battle_skill_act.mbe
     }
 }

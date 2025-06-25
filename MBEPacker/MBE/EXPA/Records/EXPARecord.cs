@@ -47,6 +47,9 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect(rawRecord, cRecords);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition(rawRecord);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell(rawRecord, cRecords);
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode(rawRecord);
                 default: throw new Exception("The packer does not support this layout");
             }
             
@@ -82,6 +85,9 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell().GetRawRecord().Length;
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
@@ -116,6 +122,9 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect(json);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition(json);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell(json);
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode(json);
                 default: throw new Exception("The packer does not support this layout");
             }
         }

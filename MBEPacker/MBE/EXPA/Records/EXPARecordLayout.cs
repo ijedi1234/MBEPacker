@@ -8,6 +8,7 @@ namespace MBEPacker.MBE.EXPA.Records
 {
     public class EXPARecordLayout
     {
+        public List<int> TwoInts = new List<int>() { 2, 2 };
         public List<int> ThreeInts = new List<int>() { 2, 2, 2 };
         public List<int> FourInts = new List<int>() { 2, 2, 2, 2 };
         public List<int> FiveInts = new List<int>() { 2, 2, 2, 2, 2 };
@@ -40,6 +41,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public List<int> DataBattleSkillSet = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 8 };
         public List<int> DataBattleConditionEffect = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8 };
         public List<int> DataBattleMapSpecialCell = new List<int>() { 2, 2, 8 };
+        public List<int> DataBattleSkillAct = new List<int>() { 2, 8, 2, 8, 2, 8, 8, 2 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -71,6 +73,9 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataBattleConditionEffect)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT;
             else if (layout.SequenceEqual(FourInts) && tableName == "RandomCondition") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION;
             else if (layout.SequenceEqual(DataBattleMapSpecialCell)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL;
+
+            else if (layout.SequenceEqual(DataBattleSkillAct)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT;
+            else if (layout.SequenceEqual(TwoInts)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

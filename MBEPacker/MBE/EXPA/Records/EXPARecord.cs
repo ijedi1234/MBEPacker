@@ -17,9 +17,8 @@ namespace MBEPacker.MBE.EXPA.Records
 
         public EXPARecord(JsonObject json) { }
 
-        public static EXPARecord FormatRawRecord(List<int> layout, byte[] rawRecord, List<CHNKRecordRelativeOffset> cRecords)
+        public static EXPARecord FormatRawRecord(EXPARecordLayout expaLayout, byte[] rawRecord, List<CHNKRecordRelativeOffset> cRecords)
         {
-            EXPARecordLayout expaLayout = new EXPARecordLayout(layout);
             switch(expaLayout.LayoutType)
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText(rawRecord, cRecords);
@@ -37,14 +36,24 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID(rawRecord);
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition(rawRecord);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit(rawRecord, cRecords);
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD_TABLE): return new EXPARecordDataBattleSettingBuildTable(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CHARGE_SKILL): return new EXPARecordDataBattleSettingChargeSkill(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD): return new EXPARecordDataBattleSettingBuild(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_PASSIVE_SKILL): return new EXPARecordDataBattleSettingPassiveSkill(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL): return new EXPARecordDataBattleSettingBattleSkill(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL_SET): return new EXPARecordDataBattleSettingBattleSkillSet(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BAD_CONDITION): return new EXPARecordDataBattleSettingBadCondition(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect(rawRecord, cRecords);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition(rawRecord);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell(rawRecord, cRecords);
                 default: throw new Exception("The packer does not support this layout");
             }
             
         }
 
-        public static int GetExpectedSize(List<int> layout)
+        public static int GetExpectedSize(EXPARecordLayout expaLayout)
         {
-            EXPARecordLayout expaLayout = new EXPARecordLayout(layout);
             switch (expaLayout.LayoutType)
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText().GetRawRecord().Length;
@@ -62,13 +71,23 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit().GetRawRecord().Length;
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD_TABLE): return new EXPARecordDataBattleSettingBuildTable().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CHARGE_SKILL): return new EXPARecordDataBattleSettingChargeSkill().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD): return new EXPARecordDataBattleSettingBuild().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_PASSIVE_SKILL): return new EXPARecordDataBattleSettingPassiveSkill().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL): return new EXPARecordDataBattleSettingBattleSkill().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL_SET): return new EXPARecordDataBattleSettingBattleSkillSet().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BAD_CONDITION): return new EXPARecordDataBattleSettingBadCondition().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition().GetRawRecord().Length;
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
 
-        public static EXPARecord BuildRecordFromJson(List<int> layout, JsonObject json)
+        public static EXPARecord BuildRecordFromJson(EXPARecordLayout expaLayout, JsonObject json)
         {
-            EXPARecordLayout expaLayout = new EXPARecordLayout(layout);
             switch (expaLayout.LayoutType)
             {
                 case (EXPARecordLayoutType.TEXT): return new EXPARecordText(json);
@@ -86,9 +105,19 @@ namespace MBEPacker.MBE.EXPA.Records
                 case (EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID): return new EXPARecordDataBPLotteryGroupID(json);
                 case (EXPARecordLayoutType.DATA_BP_POSITION): return new EXPARecordDataBPPosition(json);
                 case (EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT): return new EXPARecordDataBattleSettingUnit(json);
+
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD_TABLE): return new EXPARecordDataBattleSettingBuildTable(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CHARGE_SKILL): return new EXPARecordDataBattleSettingChargeSkill(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD): return new EXPARecordDataBattleSettingBuild(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_PASSIVE_SKILL): return new EXPARecordDataBattleSettingPassiveSkill(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL): return new EXPARecordDataBattleSettingBattleSkill(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL_SET): return new EXPARecordDataBattleSettingBattleSkillSet(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_BAD_CONDITION): return new EXPARecordDataBattleSettingBadCondition(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT): return new EXPARecordDataBattleSettingConditionEffect(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION): return new EXPARecordDataBattleSettingRandomCondition(json);
+                case (EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL): return new EXPARecordDataBattleSettingMapSpecialCell(json);
                 default: throw new Exception("The packer does not support this layout");
             }
-            return new EXPARecordText(json);
         }
 
         public abstract byte[] GetRawRecord();

@@ -54,7 +54,7 @@ namespace MBEPacker.MBE.EXPA
             NameSize = Multiple4Calculator.RoundUp2MultipleOf4(Name.Length, 1);
             RecordLayout = json["layout"].AsArray().Select(i => (int)i).ToList();
             RecordLayoutCount = RecordLayout.Count;
-            RecordSize = EXPARecord.GetExpectedSize(RecordLayout);
+            RecordSize = EXPARecord.GetExpectedSize(new EXPARecordLayout(Name, RecordLayout));
             NumRecords = json["records"].AsArray().Count;
             if (GetSize() % 8 != 0) Padding = new byte[] { 0, 0, 0, 0 };
         }

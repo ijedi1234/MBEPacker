@@ -23,6 +23,17 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_BP_PLACE_ID_UI = 12, // data/bp_vr_battle_st07.mbe
         DATA_BP_LOTTERY_GROUP_ID = 13, // data/bp_vr_battle_st07.mbe
         DATA_BP_POSITION = 14, // data/bp_vr_battle_st07.mbe
-        DATA_BATTLE_SETTING_UNIT = 15 // data/bp_vr_battle_st07.mbe
+        DATA_BATTLE_SETTING_UNIT = 15, // data/battle_setting_unit.mbe
+
+        DATA_BATTLE_SETTING_BUILD_TABLE = 16, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_CHARGE_SKILL = 17, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_BUILD = 18, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_PASSIVE_SKILL = 19, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_BATTLE_SKILL = 20, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_BATTLE_SKILL_SET = 21, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_BAD_CONDITION = 22, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_CONDITION_EFFECT = 23, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_RANDOM_CONDITION = 24, // data/battle_setting.mbe
+        DATA_BATTLE_SETTING_MAP_SPECIAL_CELL = 25 // data/battle_setting.mbe
     }
 }

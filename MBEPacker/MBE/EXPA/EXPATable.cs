@@ -33,7 +33,7 @@ namespace MBEPacker.MBE.EXPA
             JsonArray recordsList = json["records"].AsArray();
             foreach(JsonNode jsonRecord in recordsList)
             {
-                EXPARecord record = EXPARecord.BuildRecordFromJson(Header.RecordLayout, jsonRecord.AsObject());
+                EXPARecord record = EXPARecord.BuildRecordFromJson(new EXPARecordLayout(Header.Name, Header.RecordLayout), jsonRecord.AsObject());
                 EXPARecords.Add(record);
                 RawRecords.Add(record.GetRawRecord());
             }
@@ -58,7 +58,7 @@ namespace MBEPacker.MBE.EXPA
             }
             for(int i = 0; i < RawRecords.Count;i++)
             {
-                EXPARecord eRecord = EXPARecord.FormatRawRecord(Header.RecordLayout, RawRecords[i], chnkRecordsForExpaRecords[i]);
+                EXPARecord eRecord = EXPARecord.FormatRawRecord(new EXPARecordLayout(Header.Name, Header.RecordLayout), RawRecords[i], chnkRecordsForExpaRecords[i]);
                 EXPARecords.Add(eRecord);
             }
         }

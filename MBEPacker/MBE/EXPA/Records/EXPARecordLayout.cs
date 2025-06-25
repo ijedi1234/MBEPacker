@@ -8,6 +8,9 @@ namespace MBEPacker.MBE.EXPA.Records
 {
     public class EXPARecordLayout
     {
+        public List<int> ThreeInts = new List<int>() { 2, 2, 2 };
+        public List<int> FourInts = new List<int>() { 2, 2, 2, 2 };
+        public List<int> FiveInts = new List<int>() { 2, 2, 2, 2, 2 };
 
         private List<int> Text = new List<int>() { 2, 7, 7, 7, 7, 7, 7 };
         private List<int> TextDecision = new List<int>() { 8, 7, 7, 7, 7, 7, 7 };
@@ -20,8 +23,6 @@ namespace MBEPacker.MBE.EXPA.Records
         private List<int> DataUIVRBattleMenu = new List<int>() { 2, 2, 2, 2, 2, 2, 8, 2 };
         public List<int> DataBattleID = new List<int>() { 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 9, 9, 9 };
         public List<int> DataPlaceID = new List<int>() { 2, 2, 2, 2, 2, 2, 2 };
-        public List<int> DataPlaceIDUI = new List<int>() { 2, 2, 2 };
-        public List<int> DataLotteryGroupID = new List<int>() { 2, 2, 2, 2, 2 };
         public List<int> DataPosition = new List<int>() 
         { 2,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
@@ -34,10 +35,15 @@ namespace MBEPacker.MBE.EXPA.Records
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4
         };
         public List<int> DataBattleSettingUnit = new List<int>() { 2, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 2, 8, 2, 2, 2 };
+        public List<int> DataBattleBuild = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+        public List<int> DataBattleSkill = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 8, 9, 9, 9, 9, 9, 9 };
+        public List<int> DataBattleSkillSet = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 8 };
+        public List<int> DataBattleConditionEffect = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8 };
+        public List<int> DataBattleMapSpecialCell = new List<int>() { 2, 2, 8 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
-        public EXPARecordLayout(List<int> layout)
+        public EXPARecordLayout(string tableName, List<int> layout)
         {
             if (layout.SequenceEqual(Text)) LayoutType = EXPARecordLayoutType.TEXT;
             else if (layout.SequenceEqual(TextDecision)) LayoutType = EXPARecordLayoutType.TEXT_DECISION;
@@ -50,10 +56,21 @@ namespace MBEPacker.MBE.EXPA.Records
             else if (layout.SequenceEqual(DataUIVRBattleMenu)) LayoutType = EXPARecordLayoutType.DATA_UI_VR_BATTLE_MENU;
             else if (layout.SequenceEqual(DataBattleID)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_ID;
             else if (layout.SequenceEqual(DataPlaceID)) LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID;
-            else if (layout.SequenceEqual(DataPlaceIDUI)) LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID_UI;
-            else if (layout.SequenceEqual(DataLotteryGroupID)) LayoutType = EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID;
+            else if (layout.SequenceEqual(ThreeInts) && tableName == "PlaceID_UI") LayoutType = EXPARecordLayoutType.DATA_BP_PLACE_ID_UI;
+            else if (layout.SequenceEqual(FiveInts) && tableName == "LotteryGroupID") LayoutType = EXPARecordLayoutType.DATA_BP_LOTTERY_GROUP_ID;
             else if (layout.SequenceEqual(DataPosition)) LayoutType = EXPARecordLayoutType.DATA_BP_POSITION;
             else if (layout.SequenceEqual(DataBattleSettingUnit)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_UNIT;
+
+            else if (layout.SequenceEqual(FourInts) && tableName == "BattleBuildTable") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD_TABLE;
+            else if (layout.SequenceEqual(ThreeInts) && tableName == "ChargeSkill") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_CHARGE_SKILL;
+            else if (layout.SequenceEqual(DataBattleBuild)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_BUILD;
+            else if (layout.SequenceEqual(FiveInts) && tableName == "PassiveSkill") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_PASSIVE_SKILL;
+            else if (layout.SequenceEqual(DataBattleSkill)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL;
+            else if (layout.SequenceEqual(DataBattleSkillSet)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_BATTLE_SKILL_SET;
+            else if (layout.SequenceEqual(ThreeInts) && tableName == "BadCondition") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_BAD_CONDITION;
+            else if (layout.SequenceEqual(DataBattleConditionEffect)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_CONDITION_EFFECT;
+            else if (layout.SequenceEqual(FourInts) && tableName == "RandomCondition") LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_RANDOM_CONDITION;
+            else if (layout.SequenceEqual(DataBattleMapSpecialCell)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SETTING_MAP_SPECIAL_CELL;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 

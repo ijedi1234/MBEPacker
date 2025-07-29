@@ -50,6 +50,8 @@ namespace MBEPacker.MBE.EXPA.Records
 
                 case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct(rawRecord, cRecords);
                 case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode(rawRecord);
+
+                case (EXPARecordLayoutType.MESSAGE): return new EXPARecordMessage(rawRecord, cRecords);
                 default: throw new Exception("The packer does not support this layout");
             }
             
@@ -88,6 +90,8 @@ namespace MBEPacker.MBE.EXPA.Records
 
                 case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct().GetRawRecord().Length;
                 case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode().GetRawRecord().Length;
+
+                case (EXPARecordLayoutType.MESSAGE): return new EXPARecordMessage().GetRawRecord().Length;
                 default: throw new Exception("The packer does not support this layout");
             }
         }
@@ -125,6 +129,8 @@ namespace MBEPacker.MBE.EXPA.Records
 
                 case (EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT): return new EXPARecordDataBattleSkillAct(json);
                 case (EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE): return new EXPARecordDataBattleShieldMode(json);
+
+                case (EXPARecordLayoutType.MESSAGE): return new EXPARecordMessage(json);
                 default: throw new Exception("The packer does not support this layout");
             }
         }

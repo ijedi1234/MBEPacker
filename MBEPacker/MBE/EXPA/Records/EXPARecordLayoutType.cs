@@ -37,6 +37,8 @@ namespace MBEPacker.MBE.EXPA.Records
         DATA_BATTLE_SETTING_MAP_SPECIAL_CELL = 25, // data/battle_setting.mbe
 
         DATA_BATTLE_SKILL_ACT = 26, // data/battle_skill_act.mbe
-        DATA_BATTLE_SHIELD_MODE = 27 // data/battle_skill_act.mbe
+        DATA_BATTLE_SHIELD_MODE = 27, // data/battle_skill_act.mbe
+
+        MESSAGE = 28 // message/k_chr005eito_01.mbe
     }
 }

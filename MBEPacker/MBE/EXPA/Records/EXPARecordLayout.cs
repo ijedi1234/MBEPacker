@@ -42,6 +42,7 @@ namespace MBEPacker.MBE.EXPA.Records
         public List<int> DataBattleConditionEffect = new List<int>() { 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8 };
         public List<int> DataBattleMapSpecialCell = new List<int>() { 2, 2, 8 };
         public List<int> DataBattleSkillAct = new List<int>() { 2, 8, 2, 8, 2, 8, 8, 2 };
+        public List<int> Message = new List<int>() { 2, 2, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7 };
 
         public EXPARecordLayoutType LayoutType { get; private set; }
 
@@ -76,6 +77,8 @@ namespace MBEPacker.MBE.EXPA.Records
 
             else if (layout.SequenceEqual(DataBattleSkillAct)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SKILL_ACT;
             else if (layout.SequenceEqual(TwoInts)) LayoutType = EXPARecordLayoutType.DATA_BATTLE_SHIELD_MODE;
+
+            else if (layout.SequenceEqual(Message)) LayoutType = EXPARecordLayoutType.MESSAGE;
             else LayoutType = EXPARecordLayoutType.UNKNOWN;
         }
 
